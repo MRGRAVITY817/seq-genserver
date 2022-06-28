@@ -13,4 +13,9 @@ defmodule Sequence.Server do
   def handle_call(:next_number, _from, current_number) do
     {:reply, current_number, current_number + 1}
   end
+
+  # should be called when `GenServer.cast()` is called
+  def handle_cast({:increment_number, delta}, current_number) do
+    {:no_reply, current_number + delta}
+  end
 end

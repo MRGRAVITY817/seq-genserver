@@ -15,10 +15,37 @@ def deps do
 end
 ```
 
+## Usage
+```bash
+$ iex -S mix
+
+# Start link with server
+iex(1)> Sequence.Server.start_link 100
+{:ok, #PID<0.151.0>}
+
+# increment number from 100 -> 101
+iex(2)> Sequence.Server.next_number   
+100
+
+# increment number from 101 -> 102
+iex(3)> Sequence.Server.next_number
+101
+
+# add number 50
+iex(4)> Sequence.Server.increment_number 50
+:ok
+
+iex(5)> Sequence.Server.next_number        
+152
+
+iex(6)> Sequence.Server.next_number
+153
+```
+
 ## Debugging options
 With `:trace` option,
-```elixir
-iex(2)> {:ok, pid} = GenServer.start_link(Sequence.Server, 100, [debug: [:trace]])
+```bash
+iex(2)> GenServer.start_link(Sequence.Server, 100, [debug: [:trace]])
 {:ok, #PID<0.186.0>}
 
 iex(3)> GenServer.call(pid, :next_number)
